@@ -1,24 +1,50 @@
-import { Button, Text } from '@react-navigation/elements';
-import { StyleSheet, View } from 'react-native';
+// Home.tsx
+import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList, Image, StyleSheet, ActivityIndicator, Pressable } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../nav/StackNavigator';
+import { fetchMeals } from '../../api/api';
+import { Meal } from '../../api/types';
 
-export function Home() {
+const Home: React.FC<NativeStackScreenProps<RootStackParamList, 'Home'>> = ({ navigation }) => {
+  const [meals, setMeals] = useState<Meal[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getMeals = async () => {
+      try {
+        const data = await fetchMeals();
+        setMeals(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getMeals();
+  }, []);
+
+  if (loading) return <ActivityIndicator size="large" color="#007AFF" style={styles.loader} />;
+
   return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Text>Open up 'src/App.tsx' to start working on your app!</Text>
-      <Button screen="Profile" params={{ user: 'jane' }}>
-        Go to Profile
-      </Button>
-      <Button screen="Settings">Go to Settings</Button>
-    </View>
+    <FlatList
+      data={meals}
+      renderItem={({ item }: { item: Meal }) => (
+        <Pressable onPress={() => navigation.navigate('RecipeDetail', { meal: item })} style={styles.card}>
+          <Image source={{ uri: item.strMealThumb }} style={styles.image} />
+          <Text style={styles.title}>{item.strMeal}</Text>
+        </Pressable>
+      )}
+      keyExtractor={(item) => item.idMeal}
+    />
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 10,
-  },
+  loader: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  card: { backgroundColor: '#fff', padding: 16, margin: 8, borderRadius: 10, elevation: 3 },
+  image: { width: '100%', height: 200, borderRadius: 10 },
+  title: { fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginTop: 8 },
 });
+
+export default Home;

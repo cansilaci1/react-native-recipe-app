@@ -1,3 +1,4 @@
+
 {
   "expo": {
     "name": "react-native-recipe-app",
@@ -7,15 +8,17 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "scheme": "reactnativerecipeapp",
+    "scheme": "react-native-recipe-app",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cansilaci.react-native-recipe-app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.TheRecipeApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
