@@ -4,7 +4,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { RootStackParamList } from "../nav/StackNavigator";
+import { RootStackParamList } from "../navigation/nav/StackNavigator";
 import { TouchableOpacity } from "react-native";
 
 const { width, height } = Dimensions.get("window");
@@ -35,7 +35,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={require("../../assets/onboard.png")}
+        source={require("../assets/onboard.png")}
         style={styles.background}
         resizeMode="cover"
       />

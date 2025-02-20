@@ -1,10 +1,9 @@
-// Home.tsx
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, ActivityIndicator, Pressable } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../nav/StackNavigator';
-import { fetchMeals } from '../../api/api';
-import { Meal } from '../../api/types';
+import { RootStackParamList } from '../navigation/nav/StackNavigator';
+import { fetchMeals } from '../api/mealService'; // ✅ Artık mealService içinden geliyor!
+import { Meal } from '../entity/meal';
 
 const Home: React.FC<NativeStackScreenProps<RootStackParamList, 'Home'>> = ({ navigation }) => {
   const [meals, setMeals] = useState<Meal[]>([]);

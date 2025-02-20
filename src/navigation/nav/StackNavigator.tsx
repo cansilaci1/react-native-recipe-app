@@ -1,11 +1,10 @@
-// StackNavigator.tsx
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import Login from '../screens/Login';
-import Home from '../screens/Home';
-import RecipeDetail from '../screens/RecipeDetail';
-import { Meal } from '../../api/types';
+import Login from '../../screens/Login';
+import Home from '../../screens/Home';
+import RecipeDetail from '../../screens/RecipeDetail';
+import { Meal } from '../../entity/meal';
 
 export type RootStackParamList = {
   Login: undefined;

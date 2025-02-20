@@ -8,11 +8,4 @@ declare module '*.png' {
     export default value;
   }
   
-  export interface Meal {
-    idMeal: string;
-    strMeal: string;
-    strMealThumb: string;
-    strCategory?: string;
-    strArea?: string;
-    strInstructions?: string;
-  }
+  
