@@ -1,10 +1,19 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-    loader: { 
+    container: { 
         flex: 1, 
-        justifyContent: 'center',
-        alignItems: 'center' 
+        backgroundColor: "#f8f8f8" 
+    },
+    emptyContainer: { 
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    emptyText: { 
+        fontSize: 18,
+        fontWeight: "bold",
+        color: "#555",
     },
     card: { 
         backgroundColor: '#fff', 
@@ -28,11 +37,11 @@ const styles = StyleSheet.create({
         textAlign: 'center', 
         marginTop: 8 
     },
-    favoriteButton: { 
+    removeButton: { 
         position: "absolute",
         top: 10,
         right: 10,
-        backgroundColor: "rgba(255, 255, 255, 0.7)",
+        backgroundColor: "red",
         borderRadius: 20,
         padding: 8,
         elevation: 3

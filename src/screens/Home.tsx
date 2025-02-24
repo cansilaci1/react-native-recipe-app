@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, StyleSheet, ActivityIndicator, Pressable } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigation/nav/StackNavigator';
-import { fetchMeals } from '../api/mealService'; // ✅ Artık mealService içinden geliyor!
-import { Meal } from '../entity/meal';
-import styles from '../styles/Home.styles';
+import React, { useEffect, useState } from "react";
+import { View, Text, FlatList, Image, Pressable, ActivityIndicator } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../navigation/nav/StackNavigator";
+import { useNavigation } from "@react-navigation/native";
+import { fetchMeals } from "../api/mealService";
+import { Meal } from "../entity/meal";
+import styles from "../styles/Home.styles";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { useFavorites } from "../context/FavoriteContext";
 
-const Home: React.FC<NativeStackScreenProps<RootStackParamList, 'Home'>> = ({ navigation }) => {
+type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, "RecipeDetail">;
+
+const Home: React.FC = () => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const { favorites, toggleFavorite } = useFavorites();
   const [meals, setMeals] = useState<Meal[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -29,12 +36,27 @@ const Home: React.FC<NativeStackScreenProps<RootStackParamList, 'Home'>> = ({ na
   return (
     <FlatList
       data={meals}
-      renderItem={({ item }: { item: Meal }) => (
-        <Pressable onPress={() => navigation.navigate('RecipeDetail', { meal: item })} style={styles.card}>
-          <Image source={{ uri: item.strMealThumb }} style={styles.image} />
-          <Text style={styles.title}>{item.strMeal}</Text>
-        </Pressable>
-      )}
+      renderItem={({ item }) => {
+        const isFavorite = favorites.some((fav) => fav.idMeal === item.idMeal);
+
+        return (
+          <Pressable 
+            onPress={() => {
+              console.log("Tarif Detayına Gidiliyor:", item);
+              navigation.navigate("RecipeDetail", { meal: item });
+            }}
+            style={styles.card}
+          >
+            <Image source={{ uri: item.strMealThumb }} style={styles.image} />
+            <Text style={styles.title}>{item.strMeal}</Text>
+
+            {/* Favori Butonu */}
+            <Pressable onPress={() => toggleFavorite(item)} style={styles.favoriteButton}>
+              <Ionicons name={isFavorite ? "heart" : "heart-outline"} size={24} color="red" />
+            </Pressable>
+          </Pressable>
+        );
+      }}
       keyExtractor={(item) => item.idMeal}
     />
   );

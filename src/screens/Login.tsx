@@ -7,6 +7,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { RootStackParamList } from "../navigation/nav/StackNavigator";
 import { TouchableOpacity } from "react-native";
 import styles from "../styles/Login.styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+
 
 const { width, height } = Dimensions.get("window");
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
@@ -28,9 +31,13 @@ const Login: React.FC<Props> = ({ navigation }) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: RegisterFormData) => {
+  const onSubmit = async (data: RegisterFormData) => {  
+    await AsyncStorage.setItem("isLoggedIn", "true");
+
     Alert.alert("", `Hoş geldin, ${data.name}!`);
-    navigation.navigate("Home");
+    navigation.replace("HomeTabs");
+    navigation.navigate("HomeTabs");  
+
   };
 
   return (
