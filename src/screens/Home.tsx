@@ -4,6 +4,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/nav/StackNavigator';
 import { fetchMeals } from '../api/mealService'; // ✅ Artık mealService içinden geliyor!
 import { Meal } from '../entity/meal';
+import styles from '../styles/Home.styles';
 
 const Home: React.FC<NativeStackScreenProps<RootStackParamList, 'Home'>> = ({ navigation }) => {
   const [meals, setMeals] = useState<Meal[]>([]);
@@ -38,12 +39,5 @@ const Home: React.FC<NativeStackScreenProps<RootStackParamList, 'Home'>> = ({ na
     />
   );
 };
-
-const styles = StyleSheet.create({
-  loader: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  card: { backgroundColor: '#fff', padding: 16, margin: 8, borderRadius: 10, elevation: 3 },
-  image: { width: '100%', height: 200, borderRadius: 10 },
-  title: { fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginTop: 8 },
-});
 
 export default Home;
