@@ -1,16 +1,37 @@
 import { StyleSheet } from "react-native";
+import { HEADER_HEIGHT_VALUE } from "../component/CurvedHeader"; // Header yüksekliği
 
 const styles = StyleSheet.create({
+    container: { 
+        flex: 1, 
+        backgroundColor: "#f8f8f8",
+        paddingHorizontal: 10
+    },
+    header: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: HEADER_HEIGHT_VALUE,
+        backgroundColor: "#17342B", // Header rengi
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 100,
+    },
+    headerTitle: {
+        color: "#FFF",
+        fontSize: 20,
+        fontWeight: "bold",
+    },
     loader: { 
         flex: 1, 
         justifyContent: 'center',
         alignItems: 'center' 
     },
     card: { 
-        top: 20,
-        backgroundColor: '#fff', 
+        backgroundColor: "#fff", 
         padding: 16, 
-        margin: 8, 
+        marginVertical: 10, 
         borderRadius: 10, 
         elevation: 3, 
         shadowColor: "#000",
@@ -19,14 +40,14 @@ const styles = StyleSheet.create({
         shadowRadius: 4
     },
     image: { 
-        width: '100%', 
+        width: "100%", 
         height: 200, 
         borderRadius: 10 
     },
     title: { 
         fontSize: 20, 
-        fontWeight: 'bold', 
-        textAlign: 'center', 
+        fontWeight: "bold", 
+        textAlign: "center", 
         marginTop: 8 
     },
     favoriteButton: { 

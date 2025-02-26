@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../navigation/nav/StackNavigator";
 import styles from "../styles/Favorite.styles";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
 type FavoriteScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, "RecipeDetail">;
 
@@ -21,28 +22,31 @@ const Favorite: React.FC = () => {
     );
   }
 
-  return (
-    <FlatList
-      data={favorites}
-      renderItem={({ item }) => (
-        <Pressable 
-          onPress={() => {
-            console.log("Tarif Detayına Gidiliyor:", item);
-            navigation.navigate("RecipeDetail", { meal: item });
-          }} 
-          style={styles.card}
-        >
-          <Image source={{ uri: item.strMealThumb }} style={styles.image} />
-          <Text style={styles.title}>{item.strMeal}</Text>
+  const renderRightActions = (item: any) => (
+    <Pressable onPress={() => toggleFavorite(item)} style={styles.removeSwipeButton}>
+      <Ionicons name="trash-outline" size={24} color="red" />
+    </Pressable>
+  );
 
-          {/* Favoriden Çıkarma Butonu */}
-          <Pressable onPress={() => toggleFavorite(item)} style={styles.removeButton}>
-            <Ionicons name="trash-outline" size={24} color="white" />
-          </Pressable>
-        </Pressable>
-      )}
-      keyExtractor={(item) => item.idMeal}
-    />
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={favorites}
+        renderItem={({ item }) => (
+          <Swipeable renderRightActions={() => renderRightActions(item)}>
+            <Pressable 
+              onPress={() => navigation.navigate("RecipeDetail", { meal: item })} 
+              style={styles.card}
+            >
+              <Image source={{ uri: item.strMealThumb }} style={styles.image} />
+              <Text style={styles.title}>{item.strMeal}</Text>
+            </Pressable>
+          </Swipeable>
+        )}
+        keyExtractor={(item) => item.idMeal}
+        contentContainerStyle={{ paddingBottom: 20 }}
+      />
+    </View>
   );
 };
 

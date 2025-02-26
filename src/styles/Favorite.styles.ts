@@ -1,14 +1,18 @@
 import { StyleSheet } from "react-native";
+import { HEADER_HEIGHT_VALUE } from "../component/CurvedHeader"; 
 
 const styles = StyleSheet.create({
     container: { 
         flex: 1, 
-        backgroundColor: "#f8f8f8" 
+        marginTop: HEADER_HEIGHT_VALUE, 
+        backgroundColor: "#f8f8f8",
+        paddingHorizontal: 10
     },
     emptyContainer: { 
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        marginTop: HEADER_HEIGHT_VALUE,
     },
     emptyText: { 
         fontSize: 18,
@@ -18,7 +22,7 @@ const styles = StyleSheet.create({
     card: { 
         backgroundColor: '#fff', 
         padding: 16, 
-        margin: 8, 
+        marginVertical: 10,
         borderRadius: 10, 
         elevation: 3, 
         shadowColor: "#000",
@@ -37,14 +41,14 @@ const styles = StyleSheet.create({
         textAlign: 'center', 
         marginTop: 8 
     },
-    removeButton: { 
-        position: "absolute",
-        top: 10,
-        right: 10,
-        backgroundColor: "red",
-        borderRadius: 20,
-        padding: 8,
-        elevation: 3
+    removeSwipeButton: { 
+        backgroundColor: "transparent",
+        justifyContent: "center",
+        alignItems: "center",
+        width: 70,
+        height: "100%",
+        borderRadius: 10,
+        marginVertical: 10
     }
 });
 

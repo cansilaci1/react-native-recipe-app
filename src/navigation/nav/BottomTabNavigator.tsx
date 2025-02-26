@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../../screens/Home";
 import Favorite from "../../screens/Favorite";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import CurvedHeader from "../../component/CurvedHeader"; // Özel kıvrımlı header bileşeni
 
 export type BottomTabParamList = {
   Home: undefined;
@@ -22,7 +21,7 @@ const BottomTabNavigator = () => {
         },
         tabBarActiveTintColor: "tomato",
         tabBarInactiveTintColor: "gray",
-        header: () => <CurvedHeader />, // CurvedHeader kullanılıyor
+        headerShown: false, // Header'ı buradan kaldırdık, çünkü artık App.tsx içinde var
       })}
     >
       <Tab.Screen name="Home" component={Home} />

@@ -4,8 +4,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import Login from "../../screens/Login"; 
 import RecipeDetail from "../../screens/RecipeDetail";
 import BottomTabNavigator from "./BottomTabNavigator";
-import CurvedHeader from "../../component/CurvedHeader"; // Kıvrımlı header bileşeni
 import { Meal } from "../../entity/meal";
+import CurvedHeader from "../../component/CurvedHeader"; // Header bileşeni
 
 export type RootStackParamList = {
   Login: undefined;
@@ -18,15 +18,27 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const StackNavigator = ({ initialRouteName }: { initialRouteName: keyof RootStackParamList }) => (
   <NavigationContainer>
     <Stack.Navigator initialRouteName={initialRouteName}>
-      <Stack.Screen name="Login" component={Login} options={{ title: "Giriş Yap" }} />
-      <Stack.Screen name="HomeTabs" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen
-        name="RecipeDetail"
-        component={RecipeDetail}
-        options={{
-          header: () => <CurvedHeader />, // CurvedHeader burada da kullanıldı
-        }}
+      <Stack.Screen 
+        name="Login" 
+        component={Login} 
+        options={{ 
+          header: () => <CurvedHeader /> // Burada header olarak eklendi
+        }} 
       />
+      <Stack.Screen 
+        name="HomeTabs" 
+        component={BottomTabNavigator} 
+        options={{ 
+          header: () => <CurvedHeader /> 
+        }} 
+      />
+      <Stack.Screen 
+        name="RecipeDetail" 
+        component={RecipeDetail} 
+        options={{ 
+          header: () => <CurvedHeader /> 
+        }} 
+      /> 
     </Stack.Navigator>
   </NavigationContainer>
 );
