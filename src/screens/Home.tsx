@@ -50,7 +50,6 @@ const Home: React.FC = () => {
             <Image source={{ uri: item.strMealThumb }} style={styles.image} />
             <Text style={styles.title}>{item.strMeal}</Text>
 
-            {/* Favori Butonu */}
             <Pressable onPress={() => toggleFavorite(item)} style={styles.favoriteButton}>
               <Ionicons name={isFavorite ? "heart" : "heart-outline"} size={24} color="red" />
             </Pressable>

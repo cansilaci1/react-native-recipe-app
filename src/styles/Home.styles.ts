@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
         alignItems: 'center' 
     },
     card: { 
+        top: 20,
         backgroundColor: '#fff', 
         padding: 16, 
         margin: 8, 
