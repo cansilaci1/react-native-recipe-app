@@ -7,8 +7,9 @@ import { fetchMeals } from "../api/mealService";
 import { Meal } from "../entity/meal";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useFavorites } from "../context/FavoriteContext";
-import { HEADER_HEIGHT_VALUE } from "../component/CurvedHeader"; // Header yüksekliği
-import styles from "../styles/Home.styles"; // Stil dosyanı çekiyoruz
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import styles from "../styles/Home.styles";
+import { HEADER_HEIGHT_VALUE } from "../component/CurvedHeader";
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, "RecipeDetail">;
 
@@ -18,8 +19,10 @@ const Home: React.FC = () => {
   const [meals, setMeals] = useState<Meal[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Animasyon için referans
   const scrollY = useRef(new Animated.Value(0)).current;
+
+  // 🔥 Swipeable öğeleri takip etmek için useRef kullanıyoruz
+  const swipeableRefs = useRef<{ [key: string]: Swipeable | null }>({});
 
   useEffect(() => {
     const getMeals = async () => {
@@ -37,52 +40,72 @@ const Home: React.FC = () => {
 
   if (loading) return <ActivityIndicator size="large" color="#007AFF" style={styles.loader} />;
 
-  // Header'ın kaybolmasını sağlayan animasyon
+  // 🔥 Header'ın kaybolmasını sağlayan animasyon
   const headerTranslateY = scrollY.interpolate({
-    inputRange: [0, HEADER_HEIGHT_VALUE + 50], 
-    outputRange: [0, -HEADER_HEIGHT_VALUE], 
+    inputRange: [0, 100], 
+    outputRange: [0, -100], 
     extrapolate: "clamp",
   });
 
+  // 🔥 Favorilere ekleme swipe işlemi
+  const handleToggleFavorite = (item: Meal) => {
+    toggleFavorite(item);
+    
+    // 🔥 Eğer swipeable referansı varsa, otomatik olarak kapat!
+    if (swipeableRefs.current[item.idMeal]) {
+      swipeableRefs.current[item.idMeal]?.close();
+    }
+  };
+
+  // 🔥 Swipe-To-Add butonu
+  const renderRightActions = (item: Meal) => {
+    const isFavorite = favorites.some((fav) => fav.idMeal === item.idMeal);
+    return (
+      <View style={styles.swipeContainer}>
+        <Pressable onPress={() => handleToggleFavorite(item)} style={styles.swipeButton}>
+          <Ionicons 
+            name={isFavorite ? "heart-dislike-outline" : "heart-outline"} 
+            style={styles.swipeIcon} 
+          />
+        </Pressable>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
+      {/* 🔥 Kaydırınca header kayboluyor */}
       <Animated.View style={[styles.header, { transform: [{ translateY: headerTranslateY }] }]}>
         <Text style={styles.headerTitle}>Tarifler</Text>
       </Animated.View>
 
-      {/* Liste */}
+      {/* 🔥 Swipe-to-Add içeren yemek listesi */}
       <Animated.FlatList
-    data={meals}
-    renderItem={({ item }) => {
-      const isFavorite = favorites.some((fav) => fav.idMeal === item.idMeal);
-
-      return (
-        <Pressable 
-          onPress={() => navigation.navigate("RecipeDetail", { meal: item })}
-          style={styles.card}
-        >
-          <Image source={{ uri: item.strMealThumb }} style={styles.image} />
-          <Text style={styles.title}>{item.strMeal + " Tarifi"}</Text>
-
-          <Pressable onPress={() => toggleFavorite(item)} style={styles.favoriteButton}>
-            <Ionicons name={isFavorite ? "heart" : "heart-outline"} size={24} color="red" />
-          </Pressable>
-        </Pressable>
-      );
-    }}
-    keyExtractor={(item) => item.idMeal}
-    numColumns={2}  
-    contentContainerStyle={{ paddingTop: HEADER_HEIGHT_VALUE, paddingBottom: 20 }} 
-    columnWrapperStyle={{ justifyContent: "space-evenly" }} // 🔥 Kartları ekrana tam ortaladık
-    scrollEventThrottle={16} 
-    bounces={true} 
-    onScroll={Animated.event(
-      [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-      { useNativeDriver: false } 
-    )}
-/>
-
-
+        data={meals}
+        numColumns={2}
+        columnWrapperStyle={{ justifyContent: "space-evenly" }}
+        contentContainerStyle={{ paddingTop: HEADER_HEIGHT_VALUE, paddingBottom: 20 }}
+        scrollEventThrottle={16}
+        bounces={true}
+        keyExtractor={(item) => item.idMeal}
+        onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], {
+          useNativeDriver: false,
+        })}
+        renderItem={({ item }) => (
+          <Swipeable
+            ref={(ref) => (swipeableRefs.current[item.idMeal] = ref)} // 🔥 Swipeable öğeyi kaydet
+            renderRightActions={() => renderRightActions(item)}
+          >
+            <Pressable 
+              onPress={() => navigation.navigate("RecipeDetail", { meal: item })}
+              style={styles.card}
+            >
+              <Image source={{ uri: item.strMealThumb }} style={styles.image} />
+              <Text style={styles.title}>{item.strMeal + " Tarifi"}</Text>
+            </Pressable>
+          </Swipeable>
+        )}
+      />
     </View>
   );
 };

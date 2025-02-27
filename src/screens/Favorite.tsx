@@ -30,7 +30,7 @@ const Favorite: React.FC = () => {
   const renderRightActions = (item: any) => (
     <View style={styles.swipeContainer}>
       <Pressable onPress={() => toggleFavorite(item)} style={styles.removeSwipeButton}>
-        <Ionicons name="trash-outline" size={24} color="white" />
+        <Ionicons name="trash-outline" size={24} color="red" />
       </Pressable>
     </View>
   );

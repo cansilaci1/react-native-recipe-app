@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: HEADER_HEIGHT_VALUE + 20,
+        marginTop: HEADER_HEIGHT_VALUE, // 🔥 Fazla boşluk kaldırıldı
     },
     emptyText: { 
         fontSize: 18,
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: 80,
         height: "100%",
-        backgroundColor: "red",
+        backgroundColor: "transparent",
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
         marginVertical: CARD_MARGIN,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     swipeContainer: {
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "red",
+        backgroundColor: "transparent",
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
         marginVertical: CARD_MARGIN,

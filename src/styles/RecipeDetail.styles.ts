@@ -1,10 +1,13 @@
 import { StyleSheet } from "react-native";
+import { HEADER_HEIGHT_VALUE } from "../component/CurvedHeader";
 
 const styles = StyleSheet.create({
     container: { 
         flexGrow: 1, 
         padding: 16, 
-        backgroundColor: '#f9f9f9' },
+        backgroundColor: 'transparent',
+        marginTop: HEADER_HEIGHT_VALUE
+     },
     image: { 
         width: '100%', 
         height: 300, 
