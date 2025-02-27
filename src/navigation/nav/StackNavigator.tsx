@@ -5,8 +5,7 @@ import Login from "../../screens/Login";
 import RecipeDetail from "../../screens/RecipeDetail";
 import BottomTabNavigator from "./BottomTabNavigator";
 import { Meal } from "../../entity/meal";
-import CurvedHeader from "../../component/CurvedHeader"; // Header bileşeni
-
+import CurvedHeader from "../../component/CurvedHeader"; 
 export type RootStackParamList = {
   Login: undefined;
   HomeTabs: undefined;
@@ -22,7 +21,7 @@ const StackNavigator = ({ initialRouteName }: { initialRouteName: keyof RootStac
         name="Login" 
         component={Login} 
         options={{ 
-          header: () => <CurvedHeader /> // Burada header olarak eklendi
+          header: () => <CurvedHeader /> 
         }} 
       />
       <Stack.Screen 

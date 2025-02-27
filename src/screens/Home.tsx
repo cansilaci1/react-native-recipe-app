@@ -39,47 +39,50 @@ const Home: React.FC = () => {
 
   // Header'ın kaybolmasını sağlayan animasyon
   const headerTranslateY = scrollY.interpolate({
-    inputRange: [0, HEADER_HEIGHT_VALUE + 50], // Biraz daha genişlettik
-    outputRange: [0, -HEADER_HEIGHT_VALUE], // Yukarı kaydıkça gizleniyor
+    inputRange: [0, HEADER_HEIGHT_VALUE + 50], 
+    outputRange: [0, -HEADER_HEIGHT_VALUE], 
     extrapolate: "clamp",
   });
 
   return (
     <View style={styles.container}>
-      {/* Header Animasyonu */}
       <Animated.View style={[styles.header, { transform: [{ translateY: headerTranslateY }] }]}>
         <Text style={styles.headerTitle}>Tarifler</Text>
       </Animated.View>
 
       {/* Liste */}
       <Animated.FlatList
-        data={meals}
-        renderItem={({ item }) => {
-          const isFavorite = favorites.some((fav) => fav.idMeal === item.idMeal);
+    data={meals}
+    renderItem={({ item }) => {
+      const isFavorite = favorites.some((fav) => fav.idMeal === item.idMeal);
 
-          return (
-            <Pressable 
-              onPress={() => navigation.navigate("RecipeDetail", { meal: item })}
-              style={styles.card}
-            >
-              <Image source={{ uri: item.strMealThumb }} style={styles.image} />
-              <Text style={styles.title}>{item.strMeal}</Text>
+      return (
+        <Pressable 
+          onPress={() => navigation.navigate("RecipeDetail", { meal: item })}
+          style={styles.card}
+        >
+          <Image source={{ uri: item.strMealThumb }} style={styles.image} />
+          <Text style={styles.title}>{item.strMeal + " Tarifi"}</Text>
 
-              <Pressable onPress={() => toggleFavorite(item)} style={styles.favoriteButton}>
-                <Ionicons name={isFavorite ? "heart" : "heart-outline"} size={24} color="red" />
-              </Pressable>
-            </Pressable>
-          );
-        }}
-        keyExtractor={(item) => item.idMeal}
-        contentContainerStyle={{ paddingTop: HEADER_HEIGHT_VALUE, paddingBottom: 20 }} // Header ile çakışmayı önler
-        scrollEventThrottle={16} // Daha akıcı animasyon için
-        bounces={true} // Scroll'un yumuşak çalışmasını sağlıyor
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: false } // Burada native driver'ı kapattık
-        )}
-      />
+          <Pressable onPress={() => toggleFavorite(item)} style={styles.favoriteButton}>
+            <Ionicons name={isFavorite ? "heart" : "heart-outline"} size={24} color="red" />
+          </Pressable>
+        </Pressable>
+      );
+    }}
+    keyExtractor={(item) => item.idMeal}
+    numColumns={2}  
+    contentContainerStyle={{ paddingTop: HEADER_HEIGHT_VALUE, paddingBottom: 20 }} 
+    columnWrapperStyle={{ justifyContent: "space-evenly" }} // 🔥 Kartları ekrana tam ortaladık
+    scrollEventThrottle={16} 
+    bounces={true} 
+    onScroll={Animated.event(
+      [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+      { useNativeDriver: false } 
+    )}
+/>
+
+
     </View>
   );
 };
