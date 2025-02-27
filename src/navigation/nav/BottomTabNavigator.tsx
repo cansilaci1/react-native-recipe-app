@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "../../screens/Home";
+import Home from "../../screens/Home/index";
 import Favorite from "../../screens/Favorite";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -21,7 +21,7 @@ const BottomTabNavigator = () => {
         },
         tabBarActiveTintColor: "tomato",
         tabBarInactiveTintColor: "gray",
-        headerShown: false, // Header'ı buradan kaldırdık, çünkü artık App.tsx içinde var
+        headerShown: false,
       })}
     >
       <Tab.Screen name="Home" component={Home} />

@@ -1,13 +1,13 @@
 import React, { useState, useRef } from "react";
 import { View, Text, FlatList, Image, Pressable, Animated } from "react-native";
-import { useFavorites } from "../context/FavoriteContext";
+import { useFavorites } from "../../context/FavoriteContext";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from "../navigation/nav/StackNavigator";
-import styles from "../styles/Favorite.styles";
+import { RootStackParamList } from "../../navigation/nav/StackNavigator";
+import styles from "./style";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import { HEADER_HEIGHT_VALUE } from "../component/CurvedHeader"; 
+import { HEADER_HEIGHT_VALUE } from "../../component/CurvedHeader"; 
 
 type FavoriteScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, "RecipeDetail">;
 

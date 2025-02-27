@@ -5,7 +5,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
-const HEADER_HEIGHT = 150; // Header yüksekliği
+const HEADER_HEIGHT = 150; 
 
 const CurvedHeader = () => {
   const navigation = useNavigation();
@@ -14,14 +14,11 @@ const CurvedHeader = () => {
   return (
     <View style={styles.container}>
       <Svg width={width} height={HEADER_HEIGHT} viewBox={`0 0 ${width} 150`} style={styles.svg}>
-        {/* 🔥 Arkaplanı tamamen şeffaf yapıyoruz */}
         <Rect x="0" y="0" width={width} height="150" fill="transparent" />
 
-        {/* Ana Kırmızı Header */}
         <Path fill="red" d={`M0,0 H${width} V100 Q${width / 2},180 0,100 Z`} />
       </Svg>
 
-      {/* Geri Tuşu (Ana Sayfada Görünmesin) */}
       {route.name !== "HomeTabs" && (
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color="white" />
@@ -38,7 +35,7 @@ const styles = StyleSheet.create({
     left: 0,
     width: "100%",
     height: HEADER_HEIGHT,
-    backgroundColor: "transparent", // 🔥 YEŞİL YERİNE ŞEFFAF OLDU
+    backgroundColor: "transparent", 
     zIndex: 10,
   },
   svg: {
@@ -47,7 +44,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: "absolute",
-    top: 50, // iPhone çentikli cihazlar için hizalama
+    top: 50, 
     left: 20,
     zIndex: 20,
   },

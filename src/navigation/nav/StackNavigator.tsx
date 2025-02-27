@@ -1,8 +1,8 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import Login from "../../screens/Login"; 
-import RecipeDetail from "../../screens/RecipeDetail";
+import Login from "../../screens/Login/index"; 
+import RecipeDetail from "../../screens/RecipeDetail/index";
 import BottomTabNavigator from "./BottomTabNavigator";
 import { Meal } from "../../entity/meal";
 import CurvedHeader from "../../component/CurvedHeader"; 

@@ -7,7 +7,7 @@ import {
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image } from 'react-native';
 
-import  Home  from '../screens/Home';
+import  Home  from '../screens/Home/index';
 
 const HomeTabs = createBottomTabNavigator({
   screens: {

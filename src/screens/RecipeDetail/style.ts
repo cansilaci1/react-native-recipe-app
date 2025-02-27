@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { HEADER_HEIGHT_VALUE } from "../component/CurvedHeader";
+import { HEADER_HEIGHT_VALUE } from "../../component/CurvedHeader";
 
 const styles = StyleSheet.create({
     container: { 

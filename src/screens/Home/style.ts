@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { HEADER_HEIGHT_VALUE } from "../component/CurvedHeader";
+import { HEADER_HEIGHT_VALUE } from "../../component/CurvedHeader";
 
 const { width } = Dimensions.get("window");
 const CARD_MARGIN = 8;
@@ -79,8 +79,8 @@ const styles = StyleSheet.create({
         zIndex: 10,
     },
     swipeIcon: {
-        fontSize: 30, // 🔥 İkon boyutu büyütüldü
-        color: "red", // 🔥 Kırmızı renk vurgulandı
+        fontSize: 30, 
+        color: "red", 
     }
 });
 

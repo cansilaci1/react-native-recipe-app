@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, Image, ScrollView } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../navigation/nav/StackNavigator";
-import styles from "../styles/RecipeDetail.styles";
+import { RootStackParamList } from "../../navigation/nav/StackNavigator";
+import styles from "./style";
 
 type Props = NativeStackScreenProps<RootStackParamList, "RecipeDetail">;
 

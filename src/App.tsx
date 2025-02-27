@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { GestureHandlerRootView } from "react-native-gesture-handler"; // Gesture handler için eklendi
+import { GestureHandlerRootView } from "react-native-gesture-handler"; 
 import StackNavigator from "./navigation/nav/StackNavigator";
 import { FavoriteProvider } from "./context/FavoriteContext";
 
@@ -15,7 +15,7 @@ const App = () => {
         setIsLoggedIn(loggedIn === "true");
       } catch (error) {
         console.error("Error checking login status:", error);
-        setIsLoggedIn(false); // Eğer bir hata olursa giriş yapılmamış olarak varsayalım
+        setIsLoggedIn(false); 
       }
     };
 

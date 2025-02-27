@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { HEADER_HEIGHT_VALUE } from "../component/CurvedHeader";
+import { HEADER_HEIGHT_VALUE } from "../../component/CurvedHeader";
 
 const { width } = Dimensions.get("window");
 const CARD_MARGIN = 8;
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         left: 0,
         width: "100%",
         height: HEADER_HEIGHT_VALUE,
-        backgroundColor: "transparent", // 🔥 Yeşil renk tamamen kaldırıldı
+        backgroundColor: "transparent", 
         justifyContent: "center",
         alignItems: "center",
         zIndex: 100,
